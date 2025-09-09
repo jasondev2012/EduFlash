@@ -1,0 +1,13 @@
+<h2>{{ curso.titulo }}</h2>
+<form method="post">
+  {% for pregunta in preguntas %}
+    <p>{{ pregunta.pregunta }}</p>
+    {% for opcion in pregunta.opciones %}
+      <label>
+        <input type="radio" name="pregunta{{ loop.index0 }}" value="{{ loop.index0 }}">
+        {{ opcion }}
+      </label><br>
+    {% endfor %}
+  {% endfor %}
+  <button type="submit">Enviar</button>
+</form>

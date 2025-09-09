@@ -1,0 +1,158 @@
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Comienza a Aprender</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs mb-3" id="authTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button"
+              role="tab">Login</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button"
+              role="tab">Registro</button>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Login Tab -->
+          <div class="tab-pane fade show active" id="login" role="tabpanel">
+            <form id="loginForm">
+              <div class="mb-3">
+                <label for="email-login" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="email-login" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password-login" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password-login" name="password" required>
+              </div>
+              <div class="d-grid gap-2 mb-2">
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Registro Tab -->
+          <div class="tab-pane fade" id="register" role="tabpanel">
+            <form id="registerForm">
+              <div class="mb-3">
+                <label for="nombres-registro" class="form-label">Nombres</label>
+                <input type="text" class="form-control" id="nombres-registro" name="nombres" required>
+              </div>
+              <div class="mb-3">
+                <label for="apellidos-registro" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos-registro" name="apellidos" required>
+              </div>
+              <div class="mb-3">
+                <label for="email-registro" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="email-registro" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password-registro" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password-registro" name="password" required>
+              </div>
+              <div class="d-grid gap-2 mb-2">
+                <button type="submit" class="btn btn-success">Registrarse</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1200">
+  <div id="toastMessage" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastBody"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toastEl = document.getElementById("toastMessage");
+  const toastBody = document.getElementById("toastBody");
+  const toast = new bootstrap.Toast(toastEl);
+
+  function showToast(success, message, error = "") {
+    if (success) {
+      toastEl.classList.remove("text-bg-danger");
+      toastEl.classList.add("text-bg-success");
+      toastBody.innerHTML = `<strong>${message}</strong>`;
+    } else {
+      toastEl.classList.remove("text-bg-success");
+      toastEl.classList.add("text-bg-danger");
+      toastBody.innerHTML = `<strong>${message}</strong><br><small>${error}</small>`;
+    }
+    toast.show();
+  }
+
+  // LOGIN
+  document.getElementById("loginForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    const response = await fetch("/login", {
+      method: "POST",
+      body: formData
+    });
+    const result = await response.json();
+
+    showToast(result.success, result.message, result.error?.message || result.error);
+
+    if (result.success) {
+      // Guardar token en localStorage
+      localStorage.setItem("idToken", result.data.idToken);
+      localStorage.setItem("refreshToken", result.data.refreshToken);
+
+      // Cerrar modal
+      const modal = bootstrap.Modal.getInstance(document.getElementById("loginModal"));
+      modal.hide();
+      
+      fetch("/perfil", {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("idToken")
+        }
+      })
+      .then(res => res.json())
+      .then(res => {
+        window.location.href = "/"
+      });
+      
+      // setTimeout(() => location.reload(), 1500); // 🔁 recargar o redirigir
+    }
+  });
+
+  // REGISTRO
+  document.getElementById("registerForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    const response = await fetch("/registro", {
+      method: "POST",
+      body: formData
+    });
+    const result = await response.json();
+
+    showToast(result.success, result.message, result.error?.message || result.error);
+
+    if (result.success) {
+      
+      // setTimeout(() => location.reload(), 1500);
+    }
+  });
+});
+</script>

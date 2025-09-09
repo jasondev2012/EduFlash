@@ -1,0 +1,6 @@
+<h2>Historial de Cursos</h2>
+<ul>
+  {% for curso_id, datos in progress.items() %}
+    <li>{{ curso_id }} - Completado: {{ datos.completado }} - Puntaje: {{ datos.puntaje }}</li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero / Encabezado -->
+<div class="container my-5">
+    <div class="text-center">
+        <h1 class="display-4 fw-bold">Sobre <span class="text-primary">EduFlash</span><i class="fa-solid fa-bolt text-warning"></i></h1>
+        <p class="lead">Una microplataforma educativa diseñada para ofrecer cursos rápidos, prácticos y accesibles a todos.</p>
+    </div>
+</div>
+
+<!-- Sección de misión y visión -->
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h3>Misión</h3>
+                <p>Facilitar el aprendizaje rápido y efectivo, permitiendo a los usuarios adquirir conocimientos de manera ágil y divertida, adaptándose a su ritmo y tiempo disponible.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h3>Visión</h3>
+                <p>Convertirnos en la plataforma líder de microaprendizaje, ofreciendo experiencias educativas personalizadas, interactivas y accesibles en cualquier dispositivo.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sección del equipo -->
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h2>Nuestro Equipo</h2>
+        <p>Un grupo apasionado por la educación y la tecnología.</p>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+        <!-- Miembro 1 -->
+        <div class="col">
+            <div class="card h-100 text-center">
+                <img src="{{ url_for('static', filename='assets/team1.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" style="width:120px; height:120px; object-fit:cover;" alt="Miembro 1">
+                <div class="card-body">
+                    <h5 class="card-title">Valentin</h5>
+                    <p class="card-text">Especialista en desarrollo de contenido educativo y diseño de microcursos.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Miembro 2 -->
+        <div class="col">
+            <div class="card h-100 text-center">
+                <img src="{{ url_for('static', filename='assets/team2.png') }}" class="card-img-top rounded-circle mx-auto mt-3" style="width:120px; height:120px; object-fit:cover;" alt="Miembro 2">
+                <div class="card-body">
+                    <h5 class="card-title">Jason Gutierrez</h5>
+                    <p class="card-text">Backend y DevOps, encargado de la infraestructura en la nube y la integración con Firebase.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Miembro 3 -->
+        <div class="col">
+            <div class="card h-100 text-center">
+                <img src="{{ url_for('static', filename='assets/team3.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" style="width:120px; height:120px; object-fit:cover;" alt="Miembro 3">
+                <div class="card-body">
+                    <h5 class="card-title">Diego</h5>
+                    <p class="card-text">Frontend y UX/UI, enfocada en crear interfaces intuitivas y atractivas para los usuarios.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Miembro 4 -->
+        <div class="col">
+            <div class="card h-100 text-center">
+                <img src="{{ url_for('static', filename='assets/team3.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" style="width:120px; height:120px; object-fit:cover;" alt="Miembro 3">
+                <div class="card-body">
+                    <h5 class="card-title">Gerson</h5>
+                    <p class="card-text">Frontend y UX/UI, enfocada en crear interfaces intuitivas y atractivas para los usuarios.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Miembro 5 -->
+        <div class="col">
+            <div class="card h-100 text-center">
+                <img src="{{ url_for('static', filename='assets/team3.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" style="width:120px; height:120px; object-fit:cover;" alt="Miembro 3">
+                <div class="card-body">
+                    <h5 class="card-title">Andy</h5>
+                    <p class="card-text">Frontend y UX/UI, enfocada en crear interfaces intuitivas y atractivas para los usuarios.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA final -->
+<div class="container my-5 text-center">
+    <h3>Únete a EduFlash hoy</h3>
+    <p>Empieza a aprender microcursos y mejora tus habilidades de manera rápida y divertida.</p>
+    <a href="/register" class="btn btn-primary btn-lg">Registrarse</a>
+</div>
+
+{% endblock %}

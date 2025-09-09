@@ -1,0 +1,9 @@
+<h2>Cursos Disponibles</h2>
+<ul>
+  {% for curso in cursos %}
+    <li>
+      <strong>{{ curso.titulo }}</strong> - {{ curso.descripcion }}
+      <a href="/quiz/{{ curso.id }}">Empezar</a>
+    </li>
+  {% endfor %}
+</ul>

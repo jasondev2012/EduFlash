@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - EduFlash{% endblock %}
+
+{% block content %}
+<h1>Bienvenido a <span class="subrayado text-primary">EduFlash<i class="fa-solid fa-bolt text-warning"></i></span></h1>
+<p>Aprende rápido con nuestros microcursos.</p>
+{% include 'business/partials/courses/list-courses.html' %}
+{% endblock %}

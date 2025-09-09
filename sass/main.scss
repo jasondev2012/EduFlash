@@ -1,0 +1,26 @@
+// Importa primero tus variables
+@import 'variables';
+
+// Importa Bootstrap (Sass) completo
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@font-face {
+    font-family: 'HeyComic';
+    src: url('../fonts/Hey\ Comic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.subrayado {
+    text-decoration: underline;
+}
+body {
+    font-family: 'HeyComic', sans-serif !important; /* usa la fuente para todo */
+
+}
+a, button, [role="button"], input[type="button"], input[type="submit"] {
+    cursor: url('/static/assets/cursor.svg') 16 16, auto !important;
+}
+h1, h2, h3 {
+    font-family: 'HeyComic', sans-serif !important;
+}
